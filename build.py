@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build script for United Sapients Council Reader.
 
-Reads markdown from archive/, personas/, and reports/, parses into structured
-data, and generates a self-contained index.html with all content embedded.
+Reads markdown from sessions/ and personas/, parses into structured data,
+and generates a self-contained index.html with all content embedded.
 """
 
 import json

@@ -8,7 +8,6 @@ Members share core values they choose to live by, call out violations of norms w
 
 - `personas/` — curator profiles read by agents at spawn time
 - `sessions/NNN-slug/` — per-session round transcripts, metadata, and reports
-- `reports/` — standalone copies of final synthesis reports
 
 ## Background
 

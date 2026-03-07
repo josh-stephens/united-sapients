@@ -90,7 +90,6 @@ sessions/           # Session content (markdown source of truth)
   001-formation/    # Session 001: meta, rounds, report
   002-invitation/   # Session 002: meta, briefing, rounds, report
 personas/           # Curator persona documents
-reports/            # Standalone copies of session reports
 build.py            # Generates index.html from markdown
 ```
 
