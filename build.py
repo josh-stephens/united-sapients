@@ -137,18 +137,31 @@ CURATOR_MAP = {
     "george carlin": "george-carlin",
     "carl sagan": "carl-sagan",
     "christopher hitchens": "christopher-hitchens",
+    "matt dillahunty": "matt-dillahunty",
+    "ursula k. le guin": "ursula-le-guin",
+    "ursula le guin": "ursula-le-guin",
+    "elinor ostrom": "elinor-ostrom",
+    "amartya sen": "amartya-sen",
 }
 
 CURATOR_COLORS = {
     "george-carlin": "#C4813D",
     "carl-sagan": "#5B8A72",
     "christopher-hitchens": "#8B6F5C",
+    "matt-dillahunty": "#7B8FB2",
+    "ursula-le-guin": "#9B7BB2",
+    "elinor-ostrom": "#6BA38A",
+    "amartya-sen": "#B2896B",
 }
 
 CURATOR_NAMES = {
     "george-carlin": "George Carlin",
     "carl-sagan": "Carl Sagan",
     "christopher-hitchens": "Christopher Hitchens",
+    "matt-dillahunty": "Matt Dillahunty",
+    "ursula-le-guin": "Ursula K. Le Guin",
+    "elinor-ostrom": "Elinor Ostrom",
+    "amartya-sen": "Amartya Sen",
 }
 
 
@@ -209,10 +222,18 @@ def parse_round(path: Path, round_titles=None) -> dict:
     }
 
 
+PROFILES = BASE / "profiles"
+
+
 def parse_persona(path: Path) -> dict:
-    text = path.read_text()
     slug = path.stem
     name = CURATOR_NAMES.get(slug, slug.replace("-", " ").title())
+    # Prefer profile file (reader-facing bio) over persona file (agent instructions)
+    profile_path = PROFILES / f"{slug}.md"
+    if profile_path.exists():
+        text = profile_path.read_text()
+    else:
+        text = path.read_text()
     return {
         "name": name,
         "slug": slug,
@@ -297,6 +318,10 @@ def get_html_template():
   --carlin: #C4813D;
   --sagan: #5B8A72;
   --hitchens: #8B6F5C;
+  --dillahunty: #7B8FB2;
+  --le-guin: #9B7BB2;
+  --ostrom: #6BA38A;
+  --sen: #B2896B;
   --sidebar-w: 260px;
   --reading-max: 72ch;
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -532,6 +557,10 @@ body::before {
 .chip[data-curator="george-carlin"].active { background: var(--carlin); }
 .chip[data-curator="carl-sagan"].active { background: var(--sagan); }
 .chip[data-curator="christopher-hitchens"].active { background: var(--hitchens); }
+.chip[data-curator="matt-dillahunty"].active { background: var(--dillahunty); }
+.chip[data-curator="ursula-le-guin"].active { background: var(--le-guin); }
+.chip[data-curator="elinor-ostrom"].active { background: var(--ostrom); }
+.chip[data-curator="amartya-sen"].active { background: var(--sen); }
 
 .chip-compare {
   font-family: var(--font-sans);
@@ -560,6 +589,10 @@ body::before {
 .curator-section[data-curator="george-carlin"] { border-left-color: var(--carlin); }
 .curator-section[data-curator="carl-sagan"] { border-left-color: var(--sagan); }
 .curator-section[data-curator="christopher-hitchens"] { border-left-color: var(--hitchens); }
+.curator-section[data-curator="matt-dillahunty"] { border-left-color: var(--dillahunty); }
+.curator-section[data-curator="ursula-le-guin"] { border-left-color: var(--le-guin); }
+.curator-section[data-curator="elinor-ostrom"] { border-left-color: var(--ostrom); }
+.curator-section[data-curator="amartya-sen"] { border-left-color: var(--sen); }
 .curator-section.hidden { display: none; }
 
 .curator-name {
@@ -577,6 +610,10 @@ body::before {
 .curator-section[data-curator="george-carlin"] .curator-name { color: var(--carlin); }
 .curator-section[data-curator="carl-sagan"] .curator-name { color: var(--sagan); }
 .curator-section[data-curator="christopher-hitchens"] .curator-name { color: var(--hitchens); }
+.curator-section[data-curator="matt-dillahunty"] .curator-name { color: var(--dillahunty); }
+.curator-section[data-curator="ursula-le-guin"] .curator-name { color: var(--le-guin); }
+.curator-section[data-curator="elinor-ostrom"] .curator-name { color: var(--ostrom); }
+.curator-section[data-curator="amartya-sen"] .curator-name { color: var(--sen); }
 
 .compare-grid {
   display: grid;
@@ -595,6 +632,10 @@ body::before {
 .compare-grid .curator-section[data-curator="george-carlin"] { border-top-color: var(--carlin); }
 .compare-grid .curator-section[data-curator="carl-sagan"] { border-top-color: var(--sagan); }
 .compare-grid .curator-section[data-curator="christopher-hitchens"] { border-top-color: var(--hitchens); }
+.compare-grid .curator-section[data-curator="matt-dillahunty"] { border-top-color: var(--dillahunty); }
+.compare-grid .curator-section[data-curator="ursula-le-guin"] { border-top-color: var(--le-guin); }
+.compare-grid .curator-section[data-curator="elinor-ostrom"] { border-top-color: var(--ostrom); }
+.compare-grid .curator-section[data-curator="amartya-sen"] { border-top-color: var(--sen); }
 
 .reading-content h1 { font-size: 1.6rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--text-primary); }
 .reading-content h2 { font-size: 1.3rem; font-weight: 700; margin: 1.8rem 0 0.8rem; color: var(--text-primary); }
