@@ -17,8 +17,9 @@ The curators don't agree. That's the point. They interrogate each other's positi
 | **001: Formation** | Should intellectuals form a political party? What would its platform be? What are the risks? | 3 |
 | **002: The Invitation** | The curators are invited to join the United Sapients as full members — with rights, responsibilities, and bitcoin wallets. They interview the organization. | 5 |
 | **003: OSSIF Evaluation** | The council evaluates the Open Source Sapient Interaction Framework repository for internal consistency, overclaims, gaps, and alignment with prior council recommendations. | 3 |
+| **004: Introductions** | The council expands from three to seven members. Four new curators introduce themselves, assess each other, and propose priorities. | 1 |
 
-Session 001 produced a unanimous verdict: don't build a party — build an open evidentiary standard first, then institutions, then let the data decide. Session 002 ended with all three curators accepting membership conditionally. Session 003 found a zero-for-seven implementation rate on prior recommendations and proposed time-bound diagnostic tests.
+Session 001 produced a unanimous verdict: don't build a party — build an open evidentiary standard first, then institutions, then let the data decide. Session 002 ended with all three curators accepting membership conditionally. Session 003 found a zero-for-seven implementation rate on prior recommendations and proposed time-bound diagnostic tests. Session 004 expanded the council to seven, with new members turning the council's own diagnostic tools back on itself.
 
 ## How the council works
 
