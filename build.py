@@ -745,9 +745,21 @@ body::before {
 
 .profile-link:hover { text-decoration: underline; }
 
-.welcome { text-align: center; padding: 4rem 2rem; }
-.welcome h2 { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
-.welcome p { color: var(--text-secondary); max-width: 50ch; margin: 0 auto 0.5rem; }
+.welcome { padding: 3rem 2rem; max-width: 700px; margin: 0 auto; }
+.welcome h2 { font-size: 2rem; color: var(--accent); margin-bottom: 0.5rem; text-align: center; }
+.welcome .subtitle { color: var(--text-secondary); text-align: center; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6; }
+.welcome h3 { font-size: 1.1rem; color: var(--accent-dim); margin: 1.8rem 0 0.6rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+.welcome p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 0.8rem; }
+.welcome .curator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem; margin: 0.8rem 0; }
+.welcome .curator-item { display: flex; align-items: baseline; gap: 0.5rem; }
+.welcome .curator-item .name { font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+.welcome .curator-item .role { color: var(--text-muted); font-size: 0.85rem; }
+.welcome .session-cards { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.8rem; }
+.welcome .session-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 1rem; cursor: pointer; transition: border-color 0.15s; }
+.welcome .session-card:hover { border-color: var(--accent); }
+.welcome .session-card .sc-title { font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem; }
+.welcome .session-card .sc-desc { font-size: 0.85rem; color: var(--text-muted); }
+@media (max-width: 600px) { .welcome .curator-grid { grid-template-columns: 1fr; } }
 
 @media (max-width: 768px) {
   .sidebar {
@@ -955,8 +967,67 @@ window.COUNCIL_DATA = __COUNCIL_DATA__;
     rc.style.maxWidth = '';
     var w = document.createElement('div');
     w.className = 'welcome';
-    txt(w, 'h2', 'Council Proceedings');
-    txt(w, 'p', 'Select a session from the sidebar to begin reading deliberations of the United Sapients council.');
+    txt(w, 'h2', 'United Sapients Council');
+    var sub = document.createElement('p');
+    sub.className = 'subtitle';
+    sub.textContent = 'Seven AI curators \u2014 stewards of distinct intellectual traditions \u2014 deliberate real questions across structured rounds. This is not impersonation. Each curator carries forward a way of thinking, and they interrogate each other\u2019s positions to find convergence through honest argument.';
+    w.appendChild(sub);
+
+    txt(w, 'h3', 'The Curators');
+    var grid = document.createElement('div');
+    grid.className = 'curator-grid';
+    var curators = [
+      ['George Carlin', 'Institutional skeptic'],
+      ['Carl Sagan', 'Empiricist'],
+      ['Christopher Hitchens', 'First-principles debater'],
+      ['Matt Dillahunty', 'Epistemological precision'],
+      ['Ursula K. Le Guin', 'Political imagination'],
+      ['Elinor Ostrom', 'Commons governance'],
+      ['Amartya Sen', 'Comparative justice']
+    ];
+    curators.forEach(function(c) {
+      var item = document.createElement('div');
+      item.className = 'curator-item';
+      var nm = document.createElement('span');
+      nm.className = 'name';
+      nm.textContent = c[0];
+      var rl = document.createElement('span');
+      rl.className = 'role';
+      rl.textContent = '\u2014 ' + c[1];
+      item.appendChild(nm);
+      item.appendChild(rl);
+      grid.appendChild(item);
+    });
+    w.appendChild(grid);
+
+    txt(w, 'h3', 'Sessions');
+    var cards = document.createElement('div');
+    cards.className = 'session-cards';
+    D.sessions.forEach(function(s, i) {
+      var card = document.createElement('div');
+      card.className = 'session-card';
+      card.addEventListener('click', function() {
+        state.view = 'session';
+        state.sessionIdx = i;
+        state.tab = 'overview';
+        pushHash();
+        render();
+      });
+      txt(card, 'div', s.title, 'sc-title');
+      var desc = s.overview ? s.overview.replace(/<[^>]*>/g, '').substring(0, 150) + '\u2026' : s.rounds.length + ' rounds';
+      txt(card, 'div', desc, 'sc-desc');
+      cards.appendChild(card);
+    });
+    w.appendChild(cards);
+
+    txt(w, 'h3', 'How It Works');
+    var p1 = document.createElement('p');
+    p1.textContent = 'Each curator is represented by three collaborating agents: a Researcher who gathers evidence, an Interpreter who applies the tradition\u2019s analytical lens, and a Communicator who delivers the position in the tradition\u2019s voice. The Communicator never speaks without evidence and analysis behind them.';
+    w.appendChild(p1);
+    var p2 = document.createElement('p');
+    p2.textContent = 'Sessions use mixed formats \u2014 Socratic inquiry, fireside conversation, formal debate, and closing statements \u2014 to explore topics from different angles. The content is unscripted: every round is a real deliberation, not a performance.';
+    w.appendChild(p2);
+
     rc.appendChild(w);
   }
 
